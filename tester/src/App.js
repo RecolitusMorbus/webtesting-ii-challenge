@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { ball, strike, foul, hits } from './stores/actions';
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <div>
-        <p>
+        <div>
           Ball {this.props.ball}
           {" "}
           Strike {this.props.strike}
@@ -13,8 +14,8 @@ export default class App extends React.Component {
           {this.props.foul} Foul Balls
           {" "}
           {this.props.hits} Hits
-        </p>
-        <p>
+        </div>
+        <div>
           <button>Pitcher Flubbed It</button>
           {" "}
           <button>Batter's Blind</button>
@@ -22,8 +23,19 @@ export default class App extends React.Component {
           <button>Can He Even Hit The Ball?!</button>
           {" "}
           <button>FINALLY!!!!</button>
-        </p>
+        </div>
       </div>
     );
   };
 };
+
+const mapPropsToState = (state) => {
+  return {
+    ball: state.ball,
+    strike: state.strike,
+    foul: state.foul,
+    hits: state.hits
+  };
+};
+
+export default connect(mapPropsToState, { ball, strike, foul, hits })(App);
